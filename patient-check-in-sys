@@ -1,0 +1,66 @@
+patients = []
+queue_number = 1
+
+while True:
+    print("Patient Check-in")
+    print("1. Add Patient")
+    print("2. View Patients")
+    print("3. Call Next Patient")
+    print("4. Exit")
+    
+    choice = input("Enter your choice (1-4): ")
+
+    if choice == '1' :
+        print("--- Clinic Staff/Nurse Section ---")
+        name = input("Enter patient's full name: ")
+        age = input("Enter patient's age: ")
+        concern = input("Enter patient's concern: ")
+        
+        patient = {"number": queue_number, "name": name, "age": age, "concern": concern}
+        patients.append(patient)
+        
+        print("Successfully added the patient! Queue Number:", queue_number)
+        queue_number += 1
+
+    elif choice == '2':
+        print("--- Doctor/Medical Officer Section ---")
+        if not patients:
+           print("No patient in the list")
+        else:
+         for p in patients:
+            print(f"{p['number']} | {p['name']} | {p['age']} | {p['concern']}")
+ 
+    elif choice == '3':
+        print("--- Doctor/Medical Officer Section ---")
+        if not patients:
+           print("No patient waiting")
+           continue
+        else:
+          next_patient = patients.pop(0)
+          print(f"Now calling the next patient {next_patient['number']}: {next_patient['name']} ({next_patient['age']} {next_patient['concern']})")
+        
+        Select = 'Yes'
+        Option = 'No'
+        while True:
+           print("Would you like to call another patient? (Yes/No)")
+           call = input("Answer: ")
+
+           if call == 'Yes':
+               if not patients:
+                 print("No patients waiting. Going back to the menu.")
+                 break
+               else:
+                 next_patient = patients.pop(0)
+                 print(f"Now calling the next patient {next_patient['number']}: {next_patient['name']} ({next_patient['age']} {next_patient['concern']})")
+                
+           elif call == 'No':
+              print("Going back to the menu") 
+              break
+           else:
+              print("Incorrect. Please answer 'Yes' or 'No.'")
+
+    elif choice == '4':
+        break
+    else:
+        print("Your choice is not in the menu. Please try again.")
+print("Thank you! Have a nice day!")
